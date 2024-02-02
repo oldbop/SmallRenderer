@@ -11,8 +11,6 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(deps/glfw/)
 add_subdirectory(deps/glad/)
 
-include_directories(deps/glfw/deps)
-
 file(GLOB SOURCES CONFIGURE_DEPENDS
   ${PROJECT_SOURCE_DIR}/src/*.hpp
   ${PROJECT_SOURCE_DIR}/src/*.cpp
