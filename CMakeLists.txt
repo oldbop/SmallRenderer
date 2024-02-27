@@ -10,6 +10,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(deps/glfw/)
 add_subdirectory(deps/glad/)
+add_subdirectory(deps/Cute/)
 
 file(GLOB SOURCES CONFIGURE_DEPENDS
   ${PROJECT_SOURCE_DIR}/src/*.hpp
@@ -24,3 +25,4 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
 
 target_link_libraries(${CMAKE_PROJECT_NAME} glfw)
 target_link_libraries(${CMAKE_PROJECT_NAME} glad)
+target_link_libraries(${CMAKE_PROJECT_NAME} Cute)

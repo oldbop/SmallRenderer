@@ -1,3 +1,4 @@
+#include <Cute/Vec3f.h>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -18,6 +19,13 @@ int main(int argc, const char **argv) {
     glfwTerminate();
     return EXIT_FAILURE;
   }
+
+  Cute_Vec3f v1 = Cute_MakeVec3f(5.0f, 4.0f, 3.0f);
+  Cute_Vec3f v2 = Cute_MakeVec3f(6.0f, 7.0f, 9.0f);
+
+  Cute_Vec3f cross = Cute_CrossVec3f(&v1, &v2);
+
+  Cute_PrintVec3f(&cross);
 
   glfwMakeContextCurrent(win);
   gladLoadGL(glfwGetProcAddress);
