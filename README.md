@@ -1,6 +1,6 @@
 # SmallRenderer
 
-A simple software renderer built in C++
+A simple software renderer built in C
 
 ### Configure & Build
 

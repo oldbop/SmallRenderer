@@ -13,8 +13,8 @@ add_subdirectory(deps/glad/)
 add_subdirectory(deps/Cute/)
 
 file(GLOB SOURCES CONFIGURE_DEPENDS
-  ${PROJECT_SOURCE_DIR}/src/*.hpp
-  ${PROJECT_SOURCE_DIR}/src/*.cpp
+  ${PROJECT_SOURCE_DIR}/src/*.h
+  ${PROJECT_SOURCE_DIR}/src/*.c
 )
 
 add_executable("${CMAKE_PROJECT_NAME}" ${SOURCES}) 

@@ -1,21 +1,20 @@
 #include <Cute/Vec3f.h>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
-#include <cstdlib>
-#include <cstddef>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, const char **argv) {
 
   if(!(glfwInit())) {
-    std::cout << "GLFW: failed to initialise.\n" << std::flush;
+    printf("GLFW: failed to initialise.\n");
     return EXIT_FAILURE;
   }
 
   GLFWwindow *win = glfwCreateWindow(500, 500, "SmallRenderer", NULL, NULL);
 
   if(!(win)) {
-    std::cout << "GLFW: failed to create window.\n" << std::flush;
+    printf("GLFW: failed to create window.\n");
     glfwTerminate();
     return EXIT_FAILURE;
   }
