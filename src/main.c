@@ -1,10 +1,28 @@
+#ifdef SYS_GL_HEADERS
+  #include <GL/gl.h>
+  #include <GLFW/glfw3.h>
+
+  void loadGL() {}
+#else
+  #include <glad/gl.h>
+  #include <GLFW/glfw3.h>
+
+  void loadGL() {
+    gladLoadGL(glfwGetProcAddress);
+  }
+#endif
+
 #include <Cute/Vec3f.h>
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
+
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(int argc, const char **argv) {
+
+  int32_t width, height;
+  uint32_t texture;
+  float ratio;
 
   if(!(glfwInit())) {
     printf("GLFW: failed to initialise.\n");
@@ -19,25 +37,25 @@ int main(int argc, const char **argv) {
     return EXIT_FAILURE;
   }
 
-  Cute_Vec3f v1 = Cute_MakeVec3f(5.0f, 4.0f, 3.0f);
-  Cute_Vec3f v2 = Cute_MakeVec3f(6.0f, 7.0f, 9.0f);
-
-  Cute_Vec3f cross = Cute_CrossVec3f(&v1, &v2);
-
-  Cute_PrintVec3f(&cross);
-
   glfwMakeContextCurrent(win);
-  gladLoadGL(glfwGetProcAddress);
+  loadGL();
   glfwSwapInterval(1);
+
+  //glGenTextures(1, &texture);
+  //glBindTexture(GL_TEXTURE_2D, texture);
 
   while(!(glfwWindowShouldClose(win))) {
 
+    glfwGetFramebufferSize(win, &width, &height);
+    ratio = width / (float) height;
+
+    glViewport(0, 0, width, height);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBegin(GL_TRIANGLES);
-    glVertex2f(-1.0f, -1.0f);
-    glVertex2f(-1.0f, 1.0f);
-    glVertex2f(1.0f, -1.0f);
+    glVertex2f(-0.5f, -0.5f);
+    glVertex2f(-0.5f, 0.5f);
+    glVertex2f(0.5f, -0.5f);
     glEnd();
 
     glfwSwapBuffers(win);
