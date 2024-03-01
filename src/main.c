@@ -18,18 +18,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const uint32_t WIDTH = 800;
+const uint32_t HEIGHT = 800;
+const float RATIO = WIDTH / (float) HEIGHT;
+const char *TITLE = "SmallRenderer";
+
 int main(int argc, const char **argv) {
 
-  int32_t width, height;
   uint32_t texture;
-  float ratio;
 
   if(!(glfwInit())) {
     printf("GLFW: failed to initialise.\n");
     return EXIT_FAILURE;
   }
 
-  GLFWwindow *win = glfwCreateWindow(500, 500, "SmallRenderer", NULL, NULL);
+  glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
+  glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+  
+  GLFWwindow *win = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
 
   if(!(win)) {
     printf("GLFW: failed to create window.\n");
@@ -39,17 +45,18 @@ int main(int argc, const char **argv) {
 
   glfwMakeContextCurrent(win);
   loadGL();
-  glfwSwapInterval(1);
 
-  //glGenTextures(1, &texture);
-  //glBindTexture(GL_TEXTURE_2D, texture);
+  glViewport(0, 0, WIDTH, HEIGHT);
+  glGenTextures(1, &texture);
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, texture);
+
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, WIDTH, HEIGHT, 0, GL_RGB,
+    GL_UNSIGNED_BYTE, NULL);
 
   while(!(glfwWindowShouldClose(win))) {
 
-    glfwGetFramebufferSize(win, &width, &height);
-    ratio = width / (float) height;
-
-    glViewport(0, 0, width, height);
+    /*
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBegin(GL_TRIANGLES);
@@ -57,8 +64,8 @@ int main(int argc, const char **argv) {
     glVertex2f(-0.5f, 0.5f);
     glVertex2f(0.5f, -0.5f);
     glEnd();
-
-    glfwSwapBuffers(win);
+    */
+    
     glfwPollEvents();
   }
 
